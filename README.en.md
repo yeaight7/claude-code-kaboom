@@ -113,6 +113,8 @@ CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 
 ### 4. Start
 
+#### macOS / Linux
+
 ```bash
 # Interactive TUI mode (full interface)
 ./bin/claude-haha
@@ -126,6 +128,34 @@ echo "explain this code" | ./bin/claude-haha -p
 # Show all options
 ./bin/claude-haha --help
 ```
+
+#### Windows
+
+> **Prerequisite**: [Git for Windows](https://git-scm.com/download/win) must be installed (provides Git Bash, which the project's internal shell execution depends on).
+
+The startup script `bin/claude-haha` is a bash script and cannot run directly in cmd or PowerShell. Use one of the following methods:
+
+**Option 1: PowerShell / cmd — call Bun directly (recommended)**
+
+```powershell
+# Interactive TUI mode
+bun --env-file=.env ./src/entrypoints/cli.tsx
+
+# Headless mode
+bun --env-file=.env ./src/entrypoints/cli.tsx -p "your prompt here"
+
+# Fallback Recovery CLI
+bun --env-file=.env ./src/localRecoveryCli.ts
+```
+
+**Option 2: Run inside Git Bash**
+
+```bash
+# Same usage as macOS / Linux
+./bin/claude-haha
+```
+
+> **Note**: Some features (voice input, Computer Use, sandbox isolation, etc.) are not available on Windows. This does not affect the core TUI interaction.
 
 ---
 
